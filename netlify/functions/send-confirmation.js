@@ -58,7 +58,7 @@ export default async (request) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'Tierra Wellness <onboarding@resend.dev>',
+      from: 'Tierra Wellness <bookings@playground.damioncaldicott.co.za>',
       to: record.email,
       subject: `Booking confirmed — ${record.date} at ${record.time}`,
       html: emailHtml,
