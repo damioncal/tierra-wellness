@@ -229,6 +229,17 @@ body {
   transition: background 0.1s; letter-spacing: 0.1em; text-transform: uppercase;
 }
 .reset-btn:hover { background: var(--surface-secondary); }
+.return-btn {
+  display: inline-block;
+  background: #1E3A2F; color: #fff;
+  border: none; border-radius: var(--radius);
+  padding: 10px 24px; font-size: 12px;
+  font-family: 'Jost', sans-serif; margin-top: 0.5rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.1s;
+}
+.return-btn:hover { background: #142a21; }
 
 @media (max-width: 500px) {
   .form-row { grid-template-columns: 1fr; }

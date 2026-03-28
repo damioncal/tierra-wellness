@@ -28,7 +28,10 @@ export default function Confirmation({ booking, onReset }) {
         </div>
       </div>
 
-      <button className="reset-btn" onClick={onReset}>Book another session</button>
+      <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <button className="reset-btn" onClick={onReset}>Book another session</button>
+        <a href="https://playground.damioncaldicott.co.za/" className="return-btn">Return to website</a>
+      </div>
     </div>
   )
 }
