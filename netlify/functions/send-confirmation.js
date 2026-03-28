@@ -1,4 +1,4 @@
-export default async (request) => {
+export default async function handler(request) {
   if (request.method !== 'POST') {
     return new Response('Method not allowed', { status: 405 })
   }
@@ -74,6 +74,4 @@ export default async (request) => {
   return new Response('Email sent', { status: 200 })
 }
 
-export const config = {
-  path: '/api/send-confirmation'
-}
+
