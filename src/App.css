@@ -246,3 +246,75 @@ body {
   .sessions-grid { grid-template-columns: 1fr; }
   .app-header { flex-direction: column; align-items: flex-start; gap: 4px; }
 }
+
+/* Admin */
+.admin-wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+.admin-header { padding: 2rem 0 1.5rem; border-bottom: 0.5px solid var(--border); margin-bottom: 0; display: flex; align-items: center; justify-content: space-between; }
+.admin-header-right { display: flex; align-items: center; gap: 12px; }
+.admin-badge { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; background: var(--green-light); color: var(--green); padding: 4px 10px; border-radius: var(--radius); }
+.admin-logout { background: none; border: 0.5px solid var(--border); border-radius: var(--radius); padding: 6px 12px; font-size: 12px; color: var(--text-muted); cursor: pointer; font-family: 'Jost', sans-serif; }
+.admin-logout:hover { background: var(--surface-secondary); }
+.admin-tabs { display: flex; gap: 0; border-bottom: 0.5px solid var(--border); margin-bottom: 2rem; }
+.admin-tab { background: none; border: none; border-bottom: 2px solid transparent; padding: 14px 20px; font-size: 13px; color: var(--text-muted); cursor: pointer; font-family: 'Jost', sans-serif; letter-spacing: 0.05em; transition: color 0.15s; margin-bottom: -0.5px; }
+.admin-tab:hover { color: var(--text); }
+.admin-tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 500; }
+.admin-main { }
+.admin-section { display: flex; flex-direction: column; gap: 1.5rem; }
+.admin-section-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.admin-section-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--green); }
+.admin-loading { font-size: 13px; color: var(--text-faint); padding: 1rem 0; }
+.admin-empty { font-size: 13px; color: var(--text-faint); padding: 1rem 0; }
+.admin-select { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: 13px; font-family: 'Jost', sans-serif; color: var(--text); outline: none; cursor: pointer; }
+.admin-filter { display: flex; gap: 6px; }
+.filter-btn { background: none; border: 0.5px solid var(--border); border-radius: var(--radius); padding: 6px 14px; font-size: 12px; color: var(--text-muted); cursor: pointer; font-family: 'Jost', sans-serif; transition: all 0.1s; }
+.filter-btn:hover { border-color: var(--border-strong); color: var(--text); }
+.filter-btn.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+/* Bookings list */
+.bookings-list { display: flex; flex-direction: column; gap: 10px; }
+.booking-row { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.booking-row.cancelled { opacity: 0.5; }
+.booking-row-main { display: flex; flex-direction: column; gap: 3px; }
+.booking-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.booking-detail { font-size: 13px; color: var(--text-muted); }
+.booking-notes { font-size: 12px; color: var(--text-faint); font-style: italic; margin-top: 4px; }
+.booking-row-actions { flex-shrink: 0; }
+.cancel-btn { background: none; border: 0.5px solid var(--border); border-radius: var(--radius); padding: 6px 12px; font-size: 12px; color: var(--text-muted); cursor: pointer; font-family: 'Jost', sans-serif; transition: all 0.1s; }
+.cancel-btn:hover { border-color: #A32D2D; color: #A32D2D; }
+.cancelled-badge { font-size: 11px; color: #A32D2D; background: #FCEBEB; padding: 4px 10px; border-radius: var(--radius); }
+
+/* Availability */
+.avail-layout { display: grid; grid-template-columns: 1fr 280px; gap: 1.5rem; align-items: start; }
+.avail-calendar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+.avail-sidebar { background: var(--surface-secondary); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; gap: 12px; }
+.avail-date-title { font-size: 14px; font-weight: 500; color: var(--text); }
+.avail-slots { display: flex; flex-direction: column; gap: 8px; }
+.avail-slot-row { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: 13px; }
+.slot-spots { color: var(--text-faint); font-size: 12px; flex: 1; }
+.remove-slot-btn { background: none; border: none; color: #A32D2D; cursor: pointer; font-size: 12px; font-family: 'Jost', sans-serif; padding: 0; }
+.avail-add { display: flex; gap: 8px; }
+.time-input { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: 13px; font-family: 'Jost', sans-serif; color: var(--text); outline: none; flex: 1; }
+.add-slot-btn { background: var(--green); color: #fff; border: none; border-radius: var(--radius); padding: 8px 14px; font-size: 12px; font-family: 'Jost', sans-serif; cursor: pointer; white-space: nowrap; }
+.add-slot-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.block-day-btn { background: none; border: 0.5px solid #A32D2D; border-radius: var(--radius); padding: 8px; font-size: 12px; color: #A32D2D; cursor: pointer; font-family: 'Jost', sans-serif; letter-spacing: 0.05em; }
+.block-day-btn:hover { background: #FCEBEB; }
+
+/* Sessions admin */
+.sessions-admin-list { display: flex; flex-direction: column; gap: 10px; }
+.session-admin-row { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.session-admin-info { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.session-admin-name { font-size: 14px; font-weight: 500; color: var(--text); }
+.session-admin-meta { font-size: 12px; color: var(--text-muted); }
+.session-admin-desc { font-size: 12px; color: var(--text-faint); line-height: 1.5; }
+.inactive-badge { font-size: 11px; color: var(--amber); background: var(--amber-light); padding: 3px 8px; border-radius: var(--radius); display: inline-block; margin-top: 4px; }
+.session-edit-form { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+
+/* Admin login */
+.admin-login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+.admin-login-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2.5rem 2rem; width: 100%; max-width: 360px; }
+.admin-login-sub { font-size: 12px; color: var(--text-faint); text-align: center; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.admin-login-form { display: flex; flex-direction: column; gap: 12px; }
+
+@media (max-width: 600px) {
+  .avail-layout { grid-template-columns: 1fr; }
+}
