@@ -182,24 +182,29 @@ function AvailabilityTab() {
   }
 
   async function addSlot() {
-    if (!selectedDay) return
+    if (!selectedDay || !newTime) return
     setSaving(true)
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(selectedDay).padStart(2, '0')}`
-    const session = sessions.find(s => s.id === selectedSession)
-    await supabase.from('availability').upsert({
+    const sessionObj = sessions.find(s => s.id === selectedSession)
+    const capacity = sessionObj?.capacity || 1
+    const { error } = await supabase.from('availability').upsert({
       session_id: selectedSession,
       date: dateStr,
       time: newTime,
-      spots_total: 1,
-      spots_left: 1,
+      spots_total: capacity,
+      spots_left: capacity,
     }, { onConflict: 'session_id,date,time' })
+    if (error) { console.error('Add slot error:', error); alert('Could not add slot: ' + error.message) }
     await fetchAvailability()
     setSaving(false)
   }
 
   async function removeSlot(id) {
-    await supabase.from('availability').delete().eq('id', id)
-    fetchAvailability()
+    setSaving(true)
+    const { error } = await supabase.from('availability').delete().eq('id', id)
+    if (error) { console.error('Remove slot error:', error); alert('Could not remove slot: ' + error.message) }
+    await fetchAvailability()
+    setSaving(false)
   }
 
   async function blockDay() {
