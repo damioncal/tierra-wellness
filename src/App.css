@@ -318,3 +318,42 @@ body {
 @media (max-width: 600px) {
   .avail-layout { grid-template-columns: 1fr; }
 }
+
+/* Calendar dots */
+.dot-available { background: #1D9E75; }
+.dot-low { background: #BA7517; }
+.dot-full { background: #E24B4A; }
+.dot-excluded { background: #B4B2A9; }
+.cal-day.all-full { cursor: not-allowed; }
+.cal-day.all-full .day-num { color: #E24B4A; opacity: 0.7; }
+.cal-day.excluded { cursor: not-allowed; opacity: 0.4; }
+.cal-day.no-slots { opacity: 0.3; }
+
+/* Time slots */
+.time-slot { display: flex; flex-direction: column; gap: 4px; min-width: 140px; }
+.slot-time-range { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); }
+.slot-arrow { color: var(--text-faint); font-size: 12px; }
+.slot-end { color: var(--text-muted); }
+.slot-status { display: flex; }
+.slot-badge { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+.badge-available { background: #E1F5EE; color: #085041; }
+.badge-low { background: #FAEEDA; color: #633806; }
+.badge-full { background: #FCEBEB; color: #A32D2D; }
+.time-slot.low { border-color: #BA7517; }
+.time-slot.selected-slot .slot-time-range { color: #085041; }
+.time-slot.selected-slot .slot-end { color: #0F6E56; }
+
+/* Session no availability */
+.session-card.no-availability { opacity: 0.5; cursor: not-allowed; }
+.session-card.no-availability:hover { border-color: var(--border); }
+.session-no-avail { font-size: 11px; color: #A32D2D; margin-top: 6px; text-align: center; letter-spacing: 0.03em; }
+
+/* Calendar button */
+.calendar-btn {
+  display: inline-block; background: none;
+  border: 1px solid var(--green); border-radius: var(--radius);
+  padding: 10px 20px; font-size: 13px; color: var(--green);
+  text-decoration: none; font-family: 'Jost', sans-serif;
+  letter-spacing: 0.05em; transition: all 0.15s; margin-top: 0.5rem;
+}
+.calendar-btn:hover { background: var(--green-faint); }

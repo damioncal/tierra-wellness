@@ -1,6 +1,24 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+function parseMinutes(duration) {
+  if (!duration) return 60
+  if (duration.includes('Full day') || duration.includes('full day')) return 480
+  const match = duration.match(/(\d+)/)
+  return match ? parseInt(match[1]) : 60
+}
+
+function calcEndTime(startTime, durationStr) {
+  const [h, m] = startTime.split(':').map(Number)
+  const mins = parseMinutes(durationStr)
+  const total = h * 60 + m + mins
+  const endH = Math.floor(total / 60) % 24
+  const endM = total % 60
+  return `${String(endH).padStart(2, '0')}:${String(endM).padStart(2, '0')}`
+}
+
 export default function TimeSlots({ session, selectedDay, selectedTime, onSelectTime }) {
   const [slots, setSlots] = useState([])
   const [loading, setLoading] = useState(false)
@@ -27,8 +45,6 @@ export default function TimeSlots({ session, selectedDay, selectedTime, onSelect
     setLoading(false)
   }
 
-  const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
-
   if (!selectedDay) return null
 
   const { year, month, day } = selectedDay
@@ -47,17 +63,31 @@ export default function TimeSlots({ session, selectedDay, selectedTime, onSelect
             const isFull = slot.spots_left === 0
             const isLow = slot.spots_left <= 2 && slot.spots_left > 0
             const isSelected = selectedTime?.id === slot.id
+            const endTime = calcEndTime(slot.time, session?.duration)
+            const spotsPercent = slot.spots_total > 1 ? Math.round((slot.spots_left / slot.spots_total) * 100) : null
+
             return (
               <div
                 key={slot.id}
-                className={`time-slot ${isFull ? 'full' : ''} ${isSelected ? 'selected-slot' : ''}`}
+                className={`time-slot ${isFull ? 'full' : ''} ${isSelected ? 'selected-slot' : ''} ${isLow && !isFull ? 'low' : ''}`}
                 onClick={() => !isFull && onSelectTime(slot)}
               >
-                {slot.time}
-                {isLow && !isFull && (
-                  <span className="spots-warning"> · {slot.spots_left} left</span>
-                )}
-                {isFull && <span className="spots-full"> · Full</span>}
+                <div className="slot-time-range">
+                  <span className="slot-start">{slot.time}</span>
+                  <span className="slot-arrow">→</span>
+                  <span className="slot-end">{endTime}</span>
+                </div>
+                <div className="slot-status">
+                  {isFull && <span className="slot-badge badge-full">Full</span>}
+                  {!isFull && slot.spots_total > 1 && (
+                    <span className={`slot-badge ${isLow ? 'badge-low' : 'badge-available'}`}>
+                      {slot.spots_left} {slot.spots_left === 1 ? 'spot' : 'spots'} left
+                    </span>
+                  )}
+                  {!isFull && slot.spots_total === 1 && (
+                    <span className="slot-badge badge-available">Available</span>
+                  )}
+                </div>
               </div>
             )
           })}

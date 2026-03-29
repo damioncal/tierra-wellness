@@ -1,9 +1,17 @@
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
+
+function formatDate(dateStr) {
+  if (!dateStr) return ''
+  const [year, month, day] = dateStr.split('-')
+  return `${parseInt(day)} ${MONTHS[parseInt(month) - 1]} ${year}`
+}
+
 export default function Confirmation({ booking, onReset }) {
   return (
     <div className="confirmation-wrap">
       <div className="confirm-icon">&#10003;</div>
       <h2 className="confirm-title">You're booked</h2>
-      <p className="confirm-sub">A confirmation will be sent to <strong>{booking.email}</strong></p>
+      <p className="confirm-sub">A confirmation has been sent to <strong>{booking.email}</strong></p>
 
       <div className="confirm-card">
         <div className="confirm-row">
@@ -12,21 +20,33 @@ export default function Confirmation({ booking, onReset }) {
         </div>
         <div className="confirm-row">
           <span className="confirm-label">Date</span>
-          <span className="confirm-value">{booking.date}</span>
+          <span className="confirm-value">{formatDate(booking.date)}</span>
         </div>
         <div className="confirm-row">
           <span className="confirm-label">Time</span>
-          <span className="confirm-value">{booking.time}</span>
+          <span className="confirm-value">{booking.time}{booking.endTime ? ` – ${booking.endTime}` : ''}</span>
         </div>
         <div className="confirm-row">
           <span className="confirm-label">Duration</span>
           <span className="confirm-value">{booking.session.duration}</span>
         </div>
+        {booking.session.instructor && (
+          <div className="confirm-row">
+            <span className="confirm-label">Instructor</span>
+            <span className="confirm-value">{booking.session.instructor}</span>
+          </div>
+        )}
         <div className="confirm-row">
           <span className="confirm-label">Name</span>
           <span className="confirm-value">{booking.firstName} {booking.lastName}</span>
         </div>
       </div>
+
+      {booking.calendarUrl && (
+        <a href={booking.calendarUrl} target="_blank" rel="noopener noreferrer" className="calendar-btn">
+          + Add to Google Calendar
+        </a>
+      )}
 
       <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center' }}>
         <button className="reset-btn" onClick={onReset}>Book another session</button>
