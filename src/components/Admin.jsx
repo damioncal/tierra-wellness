@@ -121,7 +121,7 @@ function BookingsTab() {
       </div>
 
       {loading && <div className="admin-loading">Loading bookings...</div>}
-      {!loading && bookings.length === 0 && <div className="admin-empty">No {filter} bookings found.</div>}
+      {!loading && bookings.length === 0 && <div className="admin-empty">{filter === 'upcoming' ? 'No upcoming bookings.' : filter === 'past' ? 'No past bookings.' : 'No bookings found.'}</div>}
       {!loading && bookings.length > 0 && (
         <div className="bookings-list">
           {bookings.map(b => (
